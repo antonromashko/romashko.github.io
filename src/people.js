@@ -7,7 +7,8 @@ export class People {
   }
 
   async getData(page) {
-    let response = await fetch(page);
+    let securePage = page.replace('http', 'https');
+    let response = await fetch(securePage);
     this.data = await response.json();
     let countElements = this.data ? this.data['results'].length : 1;
     this.buildMainDiv(countElements / 2)
