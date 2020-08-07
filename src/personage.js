@@ -10,7 +10,7 @@ export class Personage {
   }
 
   async getData(page) {
-    let securePage = page.replace('http', 'https');
+    let securePage = page.replace('http:', 'https:');
     let response = await fetch(securePage);
     return await response.json();
   }
