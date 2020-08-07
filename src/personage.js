@@ -52,7 +52,6 @@ export class Personage {
   getName() {
     let tr = this.tableRow(STAR_WARS.PERSONAGE.NAME.ID, false, {th_scope: "row", th_colspan: "2"});
     tr.firstElementChild.innerHTML = this.name.toString();
-    console.log(this.name)
     document.querySelector('tbody').insertAdjacentElement('beforeend', tr);
   }
 

@@ -111,4 +111,15 @@ window.addEventListener('DOMContentLoaded', async () => {
   STAR_WARS.BUTTONS.PREVIOUS_BUTTON.addEventListener('click', prevPageMove);
   STAR_WARS.CLOSE_MODAL_BUTTON.addEventListener('click', backToList);
 
+  window.onclick = function(event) {
+  if (event.target === STAR_WARS.PERSONAGE_MODAL) {
+    backToList();
+  }
+}
+  window.onkeyup = function (event) {
+    if (event.key === 'Escape' && document.getElementById("myModal").style.display === 'block') {
+      backToList();
+    }
+  }
+
 })
