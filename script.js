@@ -1,6 +1,6 @@
-import { People } from './src/people.js'
-import { Personage } from './src/personage.js'
-import { STAR_WARS } from './consts/main.js'
+import {People} from './src/people.js';
+import {Personage} from './src/personage.js';
+import {STAR_WARS} from './consts/main.js';
 
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
     await people.getData(page);
     people.fillPage(document.querySelectorAll('div.flip-card-front'));
-    window.localStorage.setItem('page', page)
+    window.localStorage.setItem('page', page);
   }
 
   if (window.localStorage.page) {
@@ -35,13 +35,13 @@ window.addEventListener('DOMContentLoaded', async () => {
       let parentElem = event.target.parentElement;
       clickedCard = parentElem;
       let personageName = event.target.innerHTML;
-      let backSide = event.target.nextElementSibling
-        backSide.style.backgroundImage = `url('img/${personageName.toLowerCase()}.png')`;
-        STAR_WARS.AVATAR.setAttribute('src', `img/${personageName.toLowerCase()}.png`);
-        STAR_WARS.AVATAR.onerror = () => {
-          STAR_WARS.AVATAR.setAttribute('src', STAR_WARS.BASE_IMAGE);
-          backSide.style.backgroundImage = `url('${STAR_WARS.BASE_IMAGE}')`;
-        }
+      let backSide = event.target.nextElementSibling;
+      backSide.style.backgroundImage = `url('img/${personageName.toLowerCase()}.png')`;
+      STAR_WARS.AVATAR.setAttribute('src', `img/${personageName.toLowerCase()}.png`);
+      STAR_WARS.AVATAR.onerror = () => {
+        STAR_WARS.AVATAR.setAttribute('src', STAR_WARS.BASE_IMAGE);
+        backSide.style.backgroundImage = `url('${STAR_WARS.BASE_IMAGE}')`;
+      }
       STAR_WARS.AVATAR.style.display = 'block';
       await fillModal(event.target.innerHTML);
       parentElem.classList.add('flipped');
@@ -55,21 +55,23 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
+  function animateMain() {
+    STAR_WARS.MAIN_DIV.animate([
+        {opacity: 0.8},
+        {opacity: 1}],
+      {duration: 500});
+  }
+
   async function nextPageMove(event) {
     if (!people.data['previous']) {
       STAR_WARS.BUTTONS.PREVIOUS_BUTTON.removeAttribute('disabled');
     }
     event.target.setAttribute('disabled', 'disabled');
-
-    STAR_WARS.MAIN_DIV.animate([
-      {opacity: 0.8},
-      {opacity: 1}],
-    {duration: 500});
-
+    animateMain();
     let nextPage = people.data['next'];
     if (nextPage) {
       STAR_WARS.PAGE_DIV.classList.add('disabled');
-      removeMain()
+      removeMain();
       await newPageList(nextPage);
       STAR_WARS.PAGE_DIV.classList.remove('disabled');
       if (people.data['next']) {
@@ -83,16 +85,11 @@ window.addEventListener('DOMContentLoaded', async () => {
       STAR_WARS.BUTTONS.NEXT_BUTTON.removeAttribute('disabled');
     }
     event.target.setAttribute('disabled', 'disabled');
-
-    STAR_WARS.MAIN_DIV.animate([
-      {opacity: 0.8},
-      {opacity: 1}],
-    {duration: 500});
-
+    animateMain();
     let prevPage = people.data['previous'];
     if (prevPage) {
       STAR_WARS.PAGE_DIV.classList.add('disabled');
-      removeMain()
+      removeMain();
       await newPageList(prevPage);
       STAR_WARS.PAGE_DIV.classList.remove('disabled');
       if (people.data['previous']) {
@@ -101,7 +98,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  function backToList () {
+  function backToList() {
     clickedCard.classList.remove('flipped');
     let tbody = document.querySelector('tbody');
     STAR_WARS.PERSONAGE_MODAL.style.display = "none";
@@ -111,7 +108,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   STAR_WARS.MAIN_DIV.addEventListener('click', clickButton);
   STAR_WARS.BUTTONS.NEXT_BUTTON.addEventListener('click', nextPageMove);
-  STAR_WARS.BUTTONS.PREVIOUS_BUTTON.addEventListener('click', prevPageMove)
-  STAR_WARS.CLOSE_MODAL_BUTTON.addEventListener('click', backToList)
+  STAR_WARS.BUTTONS.PREVIOUS_BUTTON.addEventListener('click', prevPageMove);
+  STAR_WARS.CLOSE_MODAL_BUTTON.addEventListener('click', backToList);
 
 })

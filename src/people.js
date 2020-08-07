@@ -1,5 +1,6 @@
 import {STAR_WARS} from "../consts/main.js";
 
+
 export class People {
   constructor() {
     this.data = null
@@ -11,7 +12,7 @@ export class People {
     let response = await fetch(securePage);
     this.data = await response.json();
     let countElements = this.data ? this.data['results'].length : 1;
-    this.buildMainDiv(countElements / 2)
+    this.buildMainDiv(countElements / 2);
     return this.data
   }
 
@@ -35,7 +36,6 @@ export class People {
   }
 
   buildMainDiv(elem) {
-    console.log(STAR_WARS.MAIN_DIV.firstChild)
     if (elem === 0) {
       return
     } else {
@@ -55,9 +55,8 @@ export class People {
         subItemDiv.insertAdjacentElement('afterbegin', flipCardInner);
         subRowDiv.insertAdjacentElement('afterbegin', subItemDiv);
       }
-      STAR_WARS.MAIN_DIV.insertAdjacentElement('afterbegin', subRowDiv)
-      this.buildMainDiv(elem - 1)
+      STAR_WARS.MAIN_DIV.insertAdjacentElement('afterbegin', subRowDiv);
+      this.buildMainDiv(elem - 1);
     }
-
   }
 }

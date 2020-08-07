@@ -1,3 +1,6 @@
+import {STAR_WARS} from "../consts/main.js";
+
+
 export class Personage {
   constructor(name, gender, birthYear, homeWorld, films, species) {
     this.name = name
@@ -47,36 +50,37 @@ export class Personage {
   }
 
   getName() {
-    let tr = this.tableRow('name', false, {th_scope: "row", th_colspan: "2"});
+    let tr = this.tableRow(STAR_WARS.PERSONAGE.NAME.ID, false, {th_scope: "row", th_colspan: "2"});
     tr.firstElementChild.innerHTML = this.name.toString();
+    console.log(this.name)
     document.querySelector('tbody').insertAdjacentElement('beforeend', tr);
   }
 
   getGender() {
-    let tr = this.tableRow('gender', true, {th_scope: "row", tr_colspan: "2"});
-    tr.firstElementChild.innerHTML = 'Gender';
+    let tr = this.tableRow(STAR_WARS.PERSONAGE.GENDER.ID, true, {th_scope: "row", tr_colspan: "2"});
+    tr.firstElementChild.innerHTML = STAR_WARS.PERSONAGE.GENDER.NAME;
     tr.lastElementChild.innerHTML = this.gender.toString();
     document.querySelector('tbody').insertAdjacentElement('beforeend', tr);
   }
 
   getBirthYear() {
-    let tr = this.tableRow('birth_year', true, {th_scope: "row", tr_colspan: "2"});
-    tr.firstElementChild.innerHTML = 'Birth year';
+    let tr = this.tableRow(STAR_WARS.PERSONAGE.BIRTH_YEAR.ID, true, {th_scope: "row", tr_colspan: "2"});
+    tr.firstElementChild.innerHTML = STAR_WARS.PERSONAGE.BIRTH_YEAR.NAME;
     tr.lastElementChild.innerHTML = this.birthYear.toString();
     document.querySelector('tbody').insertAdjacentElement('beforeend', tr);
   }
 
   async getHomeWorld() {
     let planet = await this.getData(this.homeWorld);
-    let tr = this.tableRow('planet', true, {th_scope: "row", tr_colspan: "2"});
-    tr.firstElementChild.innerHTML = 'Planet';
+    let tr = this.tableRow(STAR_WARS.PERSONAGE.HOME_WORLD.ID, true, {th_scope: "row", tr_colspan: "2"});
+    tr.firstElementChild.innerHTML = STAR_WARS.PERSONAGE.HOME_WORLD.NAME;
     tr.lastElementChild.innerHTML = planet.name;
     document.querySelector('tbody').insertAdjacentElement('beforeend', tr);
   }
 
   async getFilms() {
-    let tr = this.tableRow('films', true, {th_scope: "row", tr_colspan: "2"});
-    tr.firstElementChild.innerHTML = 'Films'
+    let tr = this.tableRow(STAR_WARS.PERSONAGE.FILMS.ID, true, {th_scope: "row", tr_colspan: "2"});
+    tr.firstElementChild.innerHTML = STAR_WARS.PERSONAGE.FILMS.NAME;
     if (this.films.length > 0) {
       let list = this.createList(tr);
       for (let film of this.films) {
@@ -92,8 +96,8 @@ export class Personage {
   }
 
   async gerSpecies() {
-    let tr = this.tableRow('species', true, {th_scope: "row", tr_colspan: "2"});
-    tr.firstElementChild.innerHTML = 'Species';
+    let tr = this.tableRow(STAR_WARS.PERSONAGE.SPECIES.ID, true, {th_scope: "row", tr_colspan: "2"});
+    tr.firstElementChild.innerHTML = STAR_WARS.PERSONAGE.SPECIES.NAME;
     if (this.species.length > 0) {
       let list = this.createList(tr);
       for (let spec of this.species) {
