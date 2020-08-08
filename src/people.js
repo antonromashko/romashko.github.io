@@ -13,6 +13,11 @@ export class People {
     this.data = await response.json();
     let countElements = this.data ? this.data['results'].length : 1;
     this.buildMainDiv(countElements / 2);
+    if (!this.data['next']) {
+      STAR_WARS.BUTTONS.NEXT_BUTTON.setAttribute('disabled', 'disabled');
+    } else if (!this.data['previous']) {
+      STAR_WARS.BUTTONS.PREVIOUS_BUTTON.setAttribute('disabled', 'disabled');
+    }
     return this.data
   }
 

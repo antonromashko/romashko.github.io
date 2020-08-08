@@ -9,9 +9,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   let clickedCard;
 
   async function newPageList(page) {
-    if (page === STAR_WARS.FIRST_PAGE_URL) {
-      STAR_WARS.BUTTONS.PREVIOUS_BUTTON.setAttribute('disabled', 'disabled');
-    }
     await people.getData(page);
     people.fillPage(document.querySelectorAll('div.flip-card-front'));
     window.localStorage.setItem('page', page);
